@@ -15,3 +15,7 @@ class TestSlack(testtools.TestCase):
         self.requests_mock.register_uri('POST', slackMensaBot.slackURL, exc=requests.exceptions.Timeout)
         response = slackMensaBot.messageSlackWithMensaMessage({'test':'blub'})
         assert response is None
+
+    def testNullEmptyHandling(self):
+        result = slackMensaBot.messageSlackWithMensaMessage(None)
+        assert result is None

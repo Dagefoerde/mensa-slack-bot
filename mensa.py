@@ -1,17 +1,18 @@
 import logging
 import requests
 import datetime
-from enum import Enum
+from flufl.enum import Enum
 
 from xml.etree import ElementTree
 
 leo_uri = 'http://speiseplan.stw-muenster.de/mensa_da_vinci.xml'
 
 class FoodIconEnum(Enum):
-     Rin = ':cow:'
-     Sch = ':pig:'
-     Gfl = ':chicken:'
-     Vgt = ':eggplant:'
+    fis = ':fish: '
+    rin = ':cow: '
+    sch = ':pig: '
+    gfl = ':chicken: '
+    vgt = ':eggplant: '
 
 
 def getMenues():
@@ -23,7 +24,7 @@ def getMenues():
         return
 
     menue = ElementTree.fromstring(response.content)
-
+    print response.content
     menueMessage = []
 
     for menuePerDate in menue:
@@ -37,8 +38,13 @@ def getMenues():
 
                 mealDescription = meal + '*Tagesaktion*' if dish.find('category').text == 'Tagesaktion' else meal
 
-                if mealIcon is not None or FoodIconEnum[mealIcon.text] is not None:
-                    mealDescription = FoodIconEnum[mealIcon.text].value + ' ' + mealDescription
+                # Python EAFP concept
+                if mealIcon is not None and mealIcon.text is not None:
+                    try:
+                        mealDescription = FoodIconEnum[str.lower(mealIcon.text)].value + mealDescription
+                    except ValueError as valueErr:
+                        logging.error('We have no mapping in our FoodIconEnum for the ' + mealIcon.text + ' icon: '
+                                      + valueErr.message)
 
                 menueMessage.append(mealDescription)
 

@@ -17,8 +17,3 @@ class TestCronBasic(TestCase):
 
     def testSingleton(self):
         assert cron.ScheduleRunner() == cron.ScheduleRunner()
-
-
-    def testShutdownIfActive(self):
-        assert 1
-
