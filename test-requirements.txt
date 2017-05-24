@@ -1,0 +1,6 @@
+pytest-cov
+WebTest
+requests-mock==1.3.0
+fixtures
+pytest-xdist
+requests==2.9.1
