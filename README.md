@@ -1,7 +1,7 @@
 # mensa-slack-bot
 ## Installation
 1. install pip
-2. `pip install -r requirements.txt`
+2. `pip install --upgrade --upgrade-strategy only-if-needed -r requirements.txt`
 3. run `python slackMensaBot.py'`
 
 ## Build Status and Coverage
