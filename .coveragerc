@@ -5,3 +5,5 @@ exclude_lines =
     if __name__ == .__main__.:
     cron.ScheduleRunner().start()
     cron.scheduleCleanAndSetup()
+    while True:
+        time.sleep(60)

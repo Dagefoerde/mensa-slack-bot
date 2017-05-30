@@ -35,8 +35,7 @@ def getMenues():
             for dish in dishes:
                 meal = dish.find('meal').text
                 mealIcon = dish.find('foodicons')
-
-                mealDescription = meal + '*Tagesaktion*' if dish.find('category').text == 'Tagesaktion' else meal
+                mealDescription = meal + ' *Tagesaktion*' if dish.find('category').text == 'Tagesaktion' else meal
 
                 # Python EAFP concept
                 if mealIcon is not None and mealIcon.text is not None:

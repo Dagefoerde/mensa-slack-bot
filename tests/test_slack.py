@@ -19,3 +19,7 @@ class TestSlack(testtools.TestCase):
     def testNullEmptyHandling(self):
         result = slackMensaBot.messageSlackWithMensaMessage(None)
         assert result is None
+
+    def testNullEmptyHandling2(self):
+        result = slackMensaBot.messageSlackWithMensaMessage([])
+        assert result is None
