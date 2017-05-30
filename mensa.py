@@ -24,7 +24,7 @@ def getMenues():
         return
 
     menue = ElementTree.fromstring(response.content)
-    print response.content
+    logging.debug(response.content)
     menueMessage = []
 
     for menuePerDate in menue:
