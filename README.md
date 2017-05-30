@@ -2,7 +2,7 @@
 ## Installation
 1. install pip
 2. `pip install -r requirements.txt`
-3. run `python webservice.py'`
+3. run `python slackMensaBot.py'`
 
 ## Build Status and Coverage
 ### Master Branch
