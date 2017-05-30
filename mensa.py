@@ -41,12 +41,13 @@ def getMenues():
                 # Python EAFP concept
                 if mealIcon is not None and mealIcon.text is not None:
                     try:
-                        mealDescription = FoodIconEnum[str.lower(mealIcon.text)].value + mealDescription
+                        iconText = FoodIconEnum[str.lower(mealIcon.text)].value
                     except ValueError as valueErr:
                         logging.error('We have no mapping in our FoodIconEnum for the ' + mealIcon.text + ' icon: '
                                       + valueErr.message)
-                else:
-                    mealDescription = ':question: ' + mealDescription
+                if iconText is None:
+                    iconText = ':question: '
+                mealDescription = iconText + mealDescription
 
                 menueMessage.append(mealDescription)
 
