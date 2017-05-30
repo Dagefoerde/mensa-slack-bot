@@ -36,5 +36,4 @@ import mensa
 if __name__ == "__main__":
     cron.ScheduleRunner().start()
     cron.scheduleCleanAndSetup()
-    messageSlackWithMensaMessage(mensa.getMenues())
 
