@@ -45,6 +45,8 @@ def getMenues():
                     except ValueError as valueErr:
                         logging.error('We have no mapping in our FoodIconEnum for the ' + mealIcon.text + ' icon: '
                                       + valueErr.message)
+                else:
+                    mealDescription = ':question: ' + mealDescription
 
                 menueMessage.append(mealDescription)
 
