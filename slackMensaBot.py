@@ -37,7 +37,6 @@ import mensa
 if __name__ == "__main__":
     cron.ScheduleRunner().start()
     cron.scheduleCleanAndSetup()
-    mensa.getMenues()
     while True:
         time.sleep(60)
 
