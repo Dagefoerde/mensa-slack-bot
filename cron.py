@@ -11,7 +11,7 @@ infoTime = "11:00"
 # Check if we the coffee machine is active, if it is, deactivate it and notify the slack channel. Used by scheduleRunner every day at 8 pm
 def mensaInformer():
     # type: () -> dict
-    logging.debug('Starting mensaInformer run')
+    logging.info('Starting mensaInformer run')
     try:
         slackMensaBot.messageSlackWithMensaMessage(mensa.getMenues())
     except requests.exceptions.Timeout as timeOut:

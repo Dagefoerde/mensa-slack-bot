@@ -3,7 +3,7 @@ import cron
 import requests
 import time
 from requests.models import Response
-logging.basicConfig(filename='mensa.log', level=logging.ERROR)
+logging.basicConfig(filename='mensa.log', level=logging.INFO)
 
 slackURL = 'https://hooks.slack.com/services/....<insert URL here>'
 
@@ -38,6 +38,6 @@ if __name__ == "__main__":
     cron.ScheduleRunner().start()
     cron.scheduleCleanAndSetup()
     while True:
-        time.sleep(60)
+        time.sleep(30)
 
 
