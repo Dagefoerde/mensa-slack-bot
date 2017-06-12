@@ -38,6 +38,7 @@ def getMenues():
                 mealDescription = meal + ' *Tagesaktion*' if dish.find('category').text == 'Tagesaktion' else meal
 
                 # Python EAFP concept
+                iconText = None
                 if mealIcon is not None and mealIcon.text is not None:
                     try:
                         iconText = FoodIconEnum[str.lower(mealIcon.text)].value
