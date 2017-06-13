@@ -1,4 +1,5 @@
 test:
+  stage: test
   image: python:2.7
   script:
     - pip install -r requirements.txt
@@ -30,6 +31,7 @@ before_script:
   # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
 
 deploy:
+  stage: deploy
   environment:
     name: Raspberry
     url: https://$CI_ENVIRONMENT_URL
