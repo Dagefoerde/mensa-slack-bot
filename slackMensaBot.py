@@ -3,6 +3,8 @@ import cron
 import requests
 import time
 from requests.models import Response
+import click
+from daemonocle.cli import DaemonCLI
 logging.basicConfig(filename='mensa.log', level=logging.INFO)
 
 slackURL = 'https://hooks.slack.com/services/....<insert URL here>'
@@ -33,11 +35,13 @@ def messageSlackWithMensaMessage(mensaInformation):
     except requests.exceptions.Timeout as timeOut:
         logging.error('Could not send a message to Slack: '+timeOut.message)
 
-import mensa
-if __name__ == "__main__":
+@click.command(cls=DaemonCLI, daemon_params={'pidfile': 'slackMensaBot.pid'})
+def main():
+    """This is my our Mensa Slack Bot. It will send a daily summary of the Mensa menue to our Slack channel"""
     cron.ScheduleRunner().start()
     cron.scheduleCleanAndSetup()
     while True:
         time.sleep(30)
 
-
+if __name__ == "__main__":
+    main()

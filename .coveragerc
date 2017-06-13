@@ -2,8 +2,13 @@
 omit = tests/*
 [report]
 exclude_lines =
-    if __name__ == .__main__.:
-    cron.ScheduleRunner().start()
-    cron.scheduleCleanAndSetup()
-    while True:
-        time.sleep(60)
+    @click.command(cls=DaemonCLI, daemon_params={'pidfile': 'slackMensaBot.pid'})
+    def main():
+        """This is my our Mensa Slack Bot. It will send a daily summary of the Mensa menue to our Slack channel"""
+        cron.ScheduleRunner().start()
+        cron.scheduleCleanAndSetup()
+        while True:
+            time.sleep(30)
+
+    if __name__ == "__main__":
+        main()

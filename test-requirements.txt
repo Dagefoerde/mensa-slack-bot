@@ -5,3 +5,5 @@ fixtures
 pytest-xdist
 requests==2.9.1
 flufl.enum
+click
+daemonocle
