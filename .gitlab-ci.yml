@@ -29,3 +29,11 @@ before_script:
   # - mkdir -p ~/.ssh
   # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
 
+deploy:
+  environment:
+    name: Raspberry
+    url: https://$CI_ENVIRONMENT_URL
+  script:
+  - scp -r ./* pi@/$CI_ENVIRONMENT_URL:deployment/slackMensa/
+  only:
+  - master
