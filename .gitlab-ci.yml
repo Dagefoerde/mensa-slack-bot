@@ -35,7 +35,7 @@ deploy:
     url: https://$CI_ENVIRONMENT_URL
   script:
   - ssh pi@RASPERRY-PI-ZERO-W.uni-muenster.de mkdir -p deployment/slackMensaBot/
-  - scp -r ./* pi@/$CI_ENVIRONMENT_URL:deployment/slackMensaBot/
+  - scp -r ./* pi@$CI_ENVIRONMENT_URL:deployment/slackMensaBot/
   - ssh pi@RASPERRY-PI-ZERO-W.uni-muenster.de cd deployment/slackMensaBot/ && python slackMensaBot.py &
   only:
   - master
