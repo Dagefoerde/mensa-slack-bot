@@ -12,7 +12,7 @@ class FoodIconEnum(Enum):
     rin = ':cow: '
     sch = ':pig: '
     gfl = ':chicken: '
-    vgt = ':eggplant: '
+    vgt = ':seedling: '
 
 
 def getMenues():
