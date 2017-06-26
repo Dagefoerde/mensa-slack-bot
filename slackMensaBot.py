@@ -37,7 +37,7 @@ def messageSlackWithMensaMessage(mensaInformation):
 
 @click.command(cls=DaemonCLI, daemon_params={'pidfile': 'slackMensaBot.pid'})
 def main():
-    """This is our Mensa Slack Bot. It will send a daily summary of the Mensa menue to our Slack channel"""
+    """This is the LS PI Mensa Slack Bot. It will send a daily summary of the Mensa menue to our Slack channel"""
     cron.ScheduleRunner().start()
     cron.scheduleCleanAndSetup()
     while True:
