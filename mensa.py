@@ -39,16 +39,16 @@ def getMenues():
                 mealDescription = meal + ' *Tagesaktion*' if dish.find('category').text == 'Tagesaktion' else meal
 
                 # Python EAFP concept
-                iconText = None
                 icons = []
                 if mealIcon is not None and mealIcon.text is not None:
                     ingredients = mealIcon.text.split(',')
                     for i in ingredients:
                         try:
-                            iconText = FoodIconEnum[str.lower(i.strip())].value
+                            icons.append(FoodIconEnum[str.lower(i.strip())].value)
                         except ValueError as valueErr:
                             logging.error('We have no mapping in our FoodIconEnum for the ' + i.strip() + ' icon: '
                                           + valueErr.message)
+                iconText = None
                 if len(icons) == 0:
                     iconText = ':question: '
                 else:
