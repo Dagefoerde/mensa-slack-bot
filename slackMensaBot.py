@@ -40,6 +40,7 @@ def main():
     """This is the LS PI Mensa Slack Bot. It will send a daily summary of the Mensa menue to our Slack channel"""
     cron.ScheduleRunner().start()
     cron.scheduleCleanAndSetup()
+    messageSlackWithMensaMessage(mensa.getMenues())
     while True:
         time.sleep(30)
 
