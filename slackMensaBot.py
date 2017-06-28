@@ -1,5 +1,6 @@
 import logging
 import cron
+import mensa
 import requests
 import time
 from requests.models import Response
