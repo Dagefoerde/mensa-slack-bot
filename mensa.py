@@ -13,6 +13,7 @@ class FoodIconEnum(Enum):
     sch = ':pig: '
     gfl = ':chicken: '
     vgt = ':seedling: '
+    alk = ':wine_glass: '
 
 
 def getMenues():
@@ -39,14 +40,19 @@ def getMenues():
 
                 # Python EAFP concept
                 iconText = None
+                icons = []
                 if mealIcon is not None and mealIcon.text is not None:
-                    try:
-                        iconText = FoodIconEnum[str.lower(mealIcon.text)].value
-                    except ValueError as valueErr:
-                        logging.error('We have no mapping in our FoodIconEnum for the ' + mealIcon.text + ' icon: '
-                                      + valueErr.message)
-                if iconText is None:
+                    ingredients = mealIcon.text.split(',')
+                    for i in ingredients:
+                        try:
+                            iconText = FoodIconEnum[str.lower(i.strip())].value
+                        except ValueError as valueErr:
+                            logging.error('We have no mapping in our FoodIconEnum for the ' + i.strip() + ' icon: '
+                                          + valueErr.message)
+                if len(icons) == 0:
                     iconText = ':question: '
+                else:
+                    iconText = ''.join(icons)
                 mealDescription = iconText + mealDescription
 
                 menueMessage.append(mealDescription)
