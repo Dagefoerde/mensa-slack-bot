@@ -38,7 +38,7 @@ def messageSlackWithMensaMessage(mensaInformation):
     except requests.exceptions.Timeout as timeOut:
         logging.error('Could not send a message to Slack: '+timeOut.message)
 
-#'@click.command(cls=DaemonCLI, daemon_params={'pidfile': 'slackMensaBot.pid'})
+@click.command(cls=DaemonCLI, daemon_params={'pidfile': 'slackMensaBot.pid'})
 def main():
     """This is the LS PI Mensa Slack Bot. It will send a daily summary of the Mensa menue to our Slack channel"""
     cron.ScheduleRunner().start()
