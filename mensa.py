@@ -6,6 +6,7 @@ from flufl.enum import Enum
 from xml.etree import ElementTree
 
 leo_uri = 'http://speiseplan.stw-muenster.de/mensa_da_vinci.xml'
+ring_uri = 'http://speiseplan.stw-muenster.de/mensa_am_ring.xml'
 
 class FoodIconEnum(Enum):
     fis = ':fish: '
@@ -19,7 +20,7 @@ class FoodIconEnum(Enum):
 def getMenues():
     logging.debug('Trying to get Menues from Leo')
     try:
-        response = requests.get(leo_uri);
+        response = requests.get(ring_uri);
     except requests.exceptions.Timeout as timeOutException:
         logging.error('Could not get Information from STW-Muenster.de: '+timeOutException.message)
         return
