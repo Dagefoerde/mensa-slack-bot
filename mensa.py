@@ -1,8 +1,6 @@
 import logging
 import requests
 import datetime
-from flufl.enum import Enum
-
 from xml.etree import ElementTree
 
 leo_uri = 'http://speiseplan.stw-muenster.de/mensa_da_vinci.xml'
@@ -10,14 +8,15 @@ ring_uri = 'http://speiseplan.stw-muenster.de/mensa_am_ring.xml'
 
 mensa_uri = ring_uri
 
-class FoodIconEnum(Enum):
-    fis = ':fish: '
-    rin = ':cow: '
-    sch = ':pig: '
-    gfl = ':chicken: '
-    vgt = ':seedling: '
-    alk = ':wine_glass: '
-
+foodIcons = {}
+foodIcons['fis'] = ':fish: '
+for key in ['rin', 'rnd']:
+    foodIcons[key] = ':cow: '
+foodIcons['sch'] = ':pig: '
+foodIcons['gfl'] = ':chicken: '
+for key in ['vgt','vgn']:
+    foodIcons[key] = ':seedling: '
+foodIcons['alk'] = ':wine_glass: '
 
 def getMenues():
     logging.debug('Trying to get Menues from Leo')
@@ -39,7 +38,8 @@ def getMenues():
             for dish in dishes:
                 meal = dish.find('meal').text
                 mealIcon = dish.find('foodicons')
-                mealDescription = meal + ' *Tagesaktion*' if dish.find('category').text == 'Tagesaktion' else meal
+                mealCategory = dish.find('category').text
+                mealDescription = meal + ' *Tagesaktion*' if mealCategory == 'Tagesaktion' else meal
 
                 # Python EAFP concept
                 icons = []
@@ -47,13 +47,16 @@ def getMenues():
                     ingredients = mealIcon.text.split(',')
                     for i in ingredients:
                         try:
-                            icons.append(FoodIconEnum[str.lower(i.strip())].value)
-                        except ValueError as valueErr:
-                            logging.error('We have no mapping in our FoodIconEnum for the ' + i.strip() + ' icon: '
-                                          + valueErr.message)
+                            icons.append(foodIcons[str.lower(i.strip())])
+                        except KeyError as keyErr:
+                            logging.error('We have no mapping in our foodIcons for the ' + i.strip() + ' icon: '
+                                          + keyErr.message)
                 iconText = None
                 if len(icons) == 0:
-                    iconText = ':question: '
+                    if mealCategory == 'Dessertbuffet':
+                        iconText = ':ice_cream: '
+                    else:
+                        iconText = ':question: '
                 else:
                     iconText = ''.join(icons)
                 mealDescription = iconText + mealDescription

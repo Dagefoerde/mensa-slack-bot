@@ -4,6 +4,8 @@ import mensa
 import requests
 import time
 from requests.models import Response
+import itertools
+
 import click
 from daemonocle.cli import DaemonCLI
 logging.basicConfig(filename='mensa.log', level=logging.INFO)
@@ -18,7 +20,7 @@ def messageSlackWithMensaMessage(mensaInformation):
         return
     logging.debug('Trying to send a message to Slack')
 
-    colorit = iter(colors) # Color Iterator
+    colorit = itertools.cycle(colors) # Color Cycle Iterator
 
     payload = {"attachments": []} # initial payload
     for mensaInfoAtom in mensaInformation: #
@@ -36,7 +38,7 @@ def messageSlackWithMensaMessage(mensaInformation):
     except requests.exceptions.Timeout as timeOut:
         logging.error('Could not send a message to Slack: '+timeOut.message)
 
-@click.command(cls=DaemonCLI, daemon_params={'pidfile': 'slackMensaBot.pid'})
+#'@click.command(cls=DaemonCLI, daemon_params={'pidfile': 'slackMensaBot.pid'})
 def main():
     """This is the LS PI Mensa Slack Bot. It will send a daily summary of the Mensa menue to our Slack channel"""
     cron.ScheduleRunner().start()
