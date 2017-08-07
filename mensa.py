@@ -8,6 +8,8 @@ from xml.etree import ElementTree
 leo_uri = 'http://speiseplan.stw-muenster.de/mensa_da_vinci.xml'
 ring_uri = 'http://speiseplan.stw-muenster.de/mensa_am_ring.xml'
 
+mensa_uri = leo_uri
+
 class FoodIconEnum(Enum):
     fis = ':fish: '
     rin = ':cow: '
@@ -20,7 +22,7 @@ class FoodIconEnum(Enum):
 def getMenues():
     logging.debug('Trying to get Menues from Leo')
     try:
-        response = requests.get(ring_uri);
+        response = requests.get(mensa_uri);
     except requests.exceptions.Timeout as timeOutException:
         logging.error('Could not get Information from STW-Muenster.de: '+timeOutException.message)
         return
