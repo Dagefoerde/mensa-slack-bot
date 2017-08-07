@@ -14,8 +14,8 @@ for key in ['rin', 'rnd']:
     foodIcons[key] = ':cow: '
 foodIcons['sch'] = ':pig: '
 foodIcons['gfl'] = ':chicken: '
-foodIcons['vgt'] = ':seedling: '
-foodIcons['vgn'] = ':egg: '
+foodIcons['vgt'] = ':egg: '
+foodIcons['vgn'] = ':seedling: '
 foodIcons['alk'] = ':wine_glass: '
 
 def getMenues():
