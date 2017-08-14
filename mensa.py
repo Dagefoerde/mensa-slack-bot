@@ -6,7 +6,7 @@ from xml.etree import ElementTree
 leo_uri = 'http://speiseplan.stw-muenster.de/mensa_da_vinci.xml'
 ring_uri = 'http://speiseplan.stw-muenster.de/mensa_am_ring.xml'
 
-mensa_uri = ring_uri
+mensa_uri = leo_uri
 
 foodIcons = {}
 foodIcons['fis'] = ':fish: '
