@@ -9,6 +9,7 @@ import itertools
 import click
 from daemonocle.cli import DaemonCLI
 logging.basicConfig(filename='mensa.log', level=logging.INFO)
+logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 slackURL = 'https://hooks.slack.com/services/....<insert URL here>'
 
