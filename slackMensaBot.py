@@ -10,7 +10,7 @@ import click
 from daemonocle.cli import DaemonCLI
 logging.basicConfig(
     filename='mensa.log', level=logging.INFO,
-    format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    format='%(asctime)s %(levelname)s %(module)s:%(funcName)s %(message)s')
 
 slackURL = 'https://hooks.slack.com/services/....<insert URL here>'
 
@@ -36,9 +36,16 @@ def messageSlackWithMensaMessage(mensaInformation):
     payload['attachments'][0]["pretext"] = "Lunch Menu for Today :yum:" # Add pretext to first elem
 
     try:
-        return requests.post(slackURL, json=payload, timeout=60)
+        a = requests.post(slackURL, json=payload, timeout=60)
     except requests.exceptions.Timeout as timeOut:
         logging.error('Could not send a message to Slack: '+timeOut.message)
+
+    try:
+        b = requests.post(mattermostURL, json=payload, timeout=60)
+        return a and b
+    except requests.exceptions.Timeout as timeOut:
+        logging.error('Could not send a message to Mattermost: '+timeOut.message)
+
 
 @click.command(cls=DaemonCLI, daemon_params={'pidfile': 'slackMensaBot.pid'})
 def main():
