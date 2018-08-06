@@ -13,6 +13,7 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s %(module)s:%(funcName)s %(message)s')
 
 slackURL = 'https://hooks.slack.com/services/....<insert URL here>'
+mattermostURL = 'https://zivmattermost.uni-muenster.de/hooks/....<insert URL here>'
 
 colors = ["#36a64f","#3AA3E3","warning"]
 
