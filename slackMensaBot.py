@@ -38,7 +38,7 @@ def messageSlackWithMensaMessage(mensaInformation):
 
     a = None
     try:
-         a = requests.post(slackURL, json=payload, timeout=60)
+        a = requests.post(slackURL, json=payload, timeout=60)
     except requests.exceptions.Timeout as timeOut:
         logging.error('Could not send a message to Slack: '+timeOut.message)
 
@@ -47,6 +47,7 @@ def messageSlackWithMensaMessage(mensaInformation):
         return a and b
     except requests.exceptions.Timeout as timeOut:
         logging.error('Could not send a message to Mattermost: '+timeOut.message)
+    return a
 
 
 @click.command(cls=DaemonCLI, daemon_params={'pidfile': 'slackMensaBot.pid'})
