@@ -36,8 +36,9 @@ def messageSlackWithMensaMessage(mensaInformation):
         )
     payload['attachments'][0]["pretext"] = "Lunch Menu for Today :yum:" # Add pretext to first elem
 
+    a = None
     try:
-        a = requests.post(slackURL, json=payload, timeout=60)
+         a = requests.post(slackURL, json=payload, timeout=60)
     except requests.exceptions.Timeout as timeOut:
         logging.error('Could not send a message to Slack: '+timeOut.message)
 
